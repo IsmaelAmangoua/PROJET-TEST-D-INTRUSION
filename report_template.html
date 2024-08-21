@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rapport de Test d'Intrusion</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        img { max-width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Rapport de Test d'Intrusion</h1>
+    <h2>Application</h2>
+    <p>{{ application }}</p>
+    <p>Date du Rapport: {{ date }}</p>
+
+    <h2>Vulnérabilités</h2>
+    <h3>XSS</h3>
+    <table>
+        <tr><th>URL</th><th>Payload</th><th>Status</th></tr>
+        {% for vuln in vulnerabilities['XSS'] %}
+        <tr>
+            <td>{{ vuln.url }}</td>
+            <td>{{ vuln.payload }}</td>
+            <td>{{ vuln.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <h3>SQL Injection</h3>
+    <table>
+        <tr><th>URL</th><th>Payload</th><th>Status</th></tr>
+        {% for vuln in vulnerabilities['SQL Injection'] %}
+        <tr>
+            <td>{{ vuln.url }}</td>
+            <td>{{ vuln.payload }}</td>
+            <td>{{ vuln.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Informations Système</h2>
+    <ul>
+        <li>CPU Usage: {{ system_info['CPU Usage'] }}</li>
+        <li>Memory Usage: {{ system_info['Memory Usage'] }}</li>
+        <li>Disk Usage: {{ system_info['Disk Usage'] }}</li>
+        <li>Processes Running: {{ system_info['Processes Running'] }}</li>
+    </ul>
+    
+    <h2>Graphique des Vulnérabilités</h2>
+    <img src="{{ chart_path }}" alt="Vulnerability Chart">
+</body>
+</html>
